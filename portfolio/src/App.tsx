@@ -1,35 +1,47 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import './App.css';
+import { Navbar } from './components/Navbar';
+import { Hero } from './components/Hero';
+
+/* ============================================
+   App Component
+   ============================================ */
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div className="app">
+      <Navbar
+        logoText="Cemile.dev"
+        ctaText="Let's Talk"
+        ctaHref="#contact"
+      />
+
+      <main className="main-content">
+        {/* Hero Section */}
+        <Hero
+          name="Cemile"
+          title="A Software Engineering Student building"
+          highlightedText="scalable solutions"
+          description="and pixel-perfect interfaces."
+          resumeUrl="/resume.pdf"
+        />
+
+        {/* Projects Section */}
+        <section id="projects" className="section">
+          <h2>Featured Projects</h2>
+        </section>
+
+        {/* Resume Section */}
+        <section id="resume" className="section">
+          <h2>Resume</h2>
+        </section>
+
+        {/* Contact Section */}
+        <section id="contact" className="section">
+          <h2>Contact</h2>
+        </section>
+      </main>
+    </div>
+  );
 }
 
-export default App
+export default App;
