@@ -24,7 +24,7 @@ export function Hero({
     highlightedText = 'scalable solutions',
     description = 'and pixel-perfect interfaces.',
     defaultProfileImage,
-    resumeUrl = '/resume.pdf'
+    resumeUrl = '/cv.pdf'
 }: HeroProps) {
 
     const [profileImage, setProfileImage] = useState<string | undefined>(defaultProfileImage);
@@ -51,9 +51,7 @@ export function Hero({
         }
     };
 
-    const handleDownloadResume = () => {
-        window.open(resumeUrl, '_blank');
-    };
+    // Fonksiyonu siliyoruz çünkü artık direkt link kullanacağız.
 
     return (
         <section id="home" className="hero">
@@ -106,17 +104,18 @@ export function Hero({
 
             {/* CTA Buttons */}
             <div className="hero__buttons">
-                <a href="#projects" className="hero__btn hero__btn--primary">
-                    <span className="hero__btn-icon">👁️</span>
-                    <span>View Projects</span>
+                <a href="#links" className="hero__btn hero__btn--primary">
+                    <span className="hero__btn-icon">🔗</span>
+                    <span>Linkler</span>
                 </a>
-                <button
-                    onClick={handleDownloadResume}
+                <a
+                    href={resumeUrl}
+                    download="Cemile_Nur_Erden_CV.pdf"
                     className="hero__btn hero__btn--secondary"
                 >
                     <span className="hero__btn-icon">↓</span>
-                    <span>Download Resume</span>
-                </button>
+                    <span>CV indir</span>
+                </a>
             </div>
 
             {/* Scroll Indicator */}
