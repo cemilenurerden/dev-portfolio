@@ -1,6 +1,8 @@
 import './App.css';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
+import { Links } from './components/Links';
+
 
 /* ============================================
    App Component
@@ -22,8 +24,12 @@ function App() {
           title="A Software Engineering Student building"
           highlightedText="scalable solutions"
           description="and pixel-perfect interfaces."
-          resumeUrl="/resume.pdf"
+          resumeUrl="/cv.pdf"
         />
+
+        {/* Links Section */}
+        <Links />
+
 
         {/* Projects Section */}
         <section id="projects" className="section">
