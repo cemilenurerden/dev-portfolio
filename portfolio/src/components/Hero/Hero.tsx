@@ -27,7 +27,10 @@ export function Hero({
     resumeUrl = '/cv.pdf'
 }: HeroProps) {
 
-    const [profileImage, setProfileImage] = useState<string | undefined>(defaultProfileImage);
+    const [profileImage, setProfileImage] = useState<string | undefined>(() => {
+        // Try to load image from localStorage on initial state
+        return localStorage.getItem('profileImage') || defaultProfileImage;
+    });
     const fileInputRef = useRef<HTMLInputElement>(null);
 
     // Handle profile image click - trigger file input
@@ -45,9 +48,14 @@ export function Hero({
                 return;
             }
 
-            // Create object URL for preview
-            const imageUrl = URL.createObjectURL(file);
-            setProfileImage(imageUrl);
+            // Convert to Base64 to save in localStorage
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                const base64String = reader.result as string;
+                setProfileImage(base64String);
+                localStorage.setItem('profileImage', base64String);
+            };
+            reader.readAsDataURL(file);
         }
     };
 
@@ -106,7 +114,7 @@ export function Hero({
             <div className="hero__buttons">
                 <a href="#links" className="hero__btn hero__btn--primary">
                     <span className="hero__btn-icon">🔗</span>
-                    <span>Linkler</span>
+                    <span>İletişim</span>
                 </a>
                 <a
                     href={resumeUrl}

@@ -56,7 +56,9 @@ export const Links: React.FC = () => {
     return (
         <section id="links" className="section links-section">
             <div className="container">
-                <h2 className="section__title">Linkler</h2>
+                <div className="links-header">
+                    <h2 className="section__title links-main-title">İletişim & Sosyal Medya</h2>
+                </div>
                 <div className="links-grid">
                     <LinkCard
                         id="gmail"

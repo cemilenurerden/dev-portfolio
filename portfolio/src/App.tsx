@@ -2,6 +2,8 @@ import './App.css';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { Links } from './components/Links';
+import { Projects } from './components/Projects';
+
 
 
 /* ============================================
@@ -32,9 +34,7 @@ function App() {
 
 
         {/* Projects Section */}
-        <section id="projects" className="section">
-          <h2>Featured Projects</h2>
-        </section>
+        <Projects />
 
         {/* Resume Section */}
         <section id="resume" className="section">

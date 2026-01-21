@@ -3,9 +3,31 @@
     background-color: var(--color-bg-primary);
 }
 
-.section__title {
-    margin-bottom: var(--spacing-2xl);
+.links-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
+    margin-bottom: var(--spacing-2xl);
+}
+
+.links-subtitle {
+    color: var(--color-accent-primary);
+    font-size: 0.75rem;
+    font-weight: var(--font-weight-bold);
+    letter-spacing: 0.2em;
+    display: block;
+    margin-bottom: var(--spacing-sm);
+    text-transform: uppercase;
+}
+
+.links-main-title {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    background: linear-gradient(135deg, var(--color-text-primary), var(--color-text-secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 0;
 }
 
 .links-grid {
