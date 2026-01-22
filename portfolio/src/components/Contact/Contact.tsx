@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import { useLanguage } from '../../contexts/LanguageContext';
 import './Contact.css';
 
 export const Contact: React.FC = () => {
+    const { t } = useLanguage();
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -32,18 +34,18 @@ export const Contact: React.FC = () => {
 
             if (data.success) {
                 setStatus('success');
-                setStatusMessage(data.message || 'Mesajınız başarıyla gönderildi!');
+                setStatusMessage(data.message || t('contact.success'));
                 setFormData({ name: '', email: '', message: '' });
             } else {
                 setStatus('error');
-                setStatusMessage(data.message || 'Bir hata oluştu.');
+                setStatusMessage(data.message || t('contact.error'));
             }
         } catch (error) {
             setStatus('error');
-            setStatusMessage('Sunucuya bağlanılamadı. Lütfen tekrar deneyin.');
+            setStatusMessage(t('contact.connectionError'));
         }
 
-        // 5 saniye sonra status'u resetle
+        // Reset status after 5 seconds
         setTimeout(() => {
             setStatus('idle');
             setStatusMessage('');
@@ -54,9 +56,9 @@ export const Contact: React.FC = () => {
         <section id="contact" className="contact-section">
             <div className="contact-container">
                 {/* Heading */}
-                <h2 className="contact-title">Let's build something.</h2>
+                <h2 className="contact-title">{t('contact.title')}</h2>
                 <p className="contact-subtitle">
-                    Got a project in mind or just want to talk code? My inbox is always open.
+                    {t('contact.subtitle')}
                 </p>
 
                 {/* Status Message */}
@@ -69,7 +71,7 @@ export const Contact: React.FC = () => {
                 {/* Form */}
                 <form className="contact-form" onSubmit={handleSubmit}>
                     <div className="form-group">
-                        <label className="form-label">Name</label>
+                        <label className="form-label">{t('contact.name')}</label>
                         <div className="form-input-wrapper">
                             <svg className="form-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="18" height="18">
                                 <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
@@ -80,7 +82,7 @@ export const Contact: React.FC = () => {
                                 name="name"
                                 value={formData.name}
                                 onChange={handleChange}
-                                placeholder="İsminizi Giriniz"
+                                placeholder={t('contact.namePlaceholder')}
                                 className="form-input"
                                 required
                                 disabled={status === 'loading'}
@@ -89,7 +91,7 @@ export const Contact: React.FC = () => {
                     </div>
 
                     <div className="form-group">
-                        <label className="form-label">Email</label>
+                        <label className="form-label">{t('contact.email')}</label>
                         <div className="form-input-wrapper">
                             <svg className="form-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="18" height="18">
                                 <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
@@ -100,7 +102,7 @@ export const Contact: React.FC = () => {
                                 name="email"
                                 value={formData.email}
                                 onChange={handleChange}
-                                placeholder="E-posta Adresinizi Giriniz"
+                                placeholder={t('contact.emailPlaceholder')}
                                 className="form-input"
                                 required
                                 disabled={status === 'loading'}
@@ -109,7 +111,7 @@ export const Contact: React.FC = () => {
                     </div>
 
                     <div className="form-group">
-                        <label className="form-label">Message</label>
+                        <label className="form-label">{t('contact.message')}</label>
                         <div className="form-input-wrapper form-textarea-wrapper">
                             <svg className="form-icon form-icon-textarea" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="18" height="18">
                                 <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
@@ -118,7 +120,7 @@ export const Contact: React.FC = () => {
                                 name="message"
                                 value={formData.message}
                                 onChange={handleChange}
-                                placeholder="Mesajınızı buraya yazın..."
+                                placeholder={t('contact.messagePlaceholder')}
                                 className="form-textarea"
                                 rows={5}
                                 required
@@ -132,7 +134,7 @@ export const Contact: React.FC = () => {
                         className={`contact-submit ${status === 'loading' ? 'loading' : ''}`}
                         disabled={status === 'loading'}
                     >
-                        <span>{status === 'loading' ? 'Gönderiliyor...' : 'Send Message'}</span>
+                        <span>{status === 'loading' ? t('contact.sending') : t('contact.send')}</span>
                         <span className="submit-arrow">→</span>
                     </button>
                 </form>

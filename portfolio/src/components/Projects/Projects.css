@@ -190,3 +190,23 @@
         gap: var(--spacing-sm);
     }
 }
+
+/* Light Mode Overrides */
+[data-theme="light"] .project-card {
+    background: rgba(255, 255, 255, 0.9);
+    border-color: rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="light"] .project-card:hover {
+    background: rgba(255, 255, 255, 1);
+    box-shadow: 0 15px 30px -15px rgba(0, 0, 0, 0.2);
+}
+
+[data-theme="light"] .project-card__tag {
+    background: rgba(0, 0, 0, 0.7);
+}
+
+[data-theme="light"] .project-card__image-container {
+    background: #e2e8f0;
+}

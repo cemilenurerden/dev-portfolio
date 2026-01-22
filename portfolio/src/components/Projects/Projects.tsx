@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useLanguage } from '../../contexts/LanguageContext';
 import './Projects.css';
 
 interface Repository {
@@ -23,6 +24,7 @@ const getProjectImage = (name: string) => {
 };
 
 export const Projects: React.FC = () => {
+    const { t } = useLanguage();
     const [repos, setRepos] = useState<Repository[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
@@ -33,7 +35,7 @@ export const Projects: React.FC = () => {
                 // Fetching from user cemilenurerden
                 const response = await fetch('https://api.github.com/users/cemilenurerden/repos?sort=updated&per_page=10');
                 if (!response.ok) {
-                    throw new Error('Projeler yüklenirken bir hata oluştu.');
+                    throw new Error(t('projects.error'));
                 }
                 const data = await response.json();
 
@@ -41,7 +43,7 @@ export const Projects: React.FC = () => {
                 const filteredRepos = data.filter((repo: Repository) => !repo.fork);
                 setRepos(filteredRepos);
             } catch (err) {
-                setError(err instanceof Error ? err.message : 'Bir hata oluştu');
+                setError(err instanceof Error ? err.message : 'An error occurred');
             } finally {
                 setLoading(false);
             }
@@ -54,8 +56,8 @@ export const Projects: React.FC = () => {
         return (
             <section id="projects" className="section projects-section">
                 <div className="container">
-                    <h2 className="section__title">Öne Çıkan Projeler</h2>
-                    <div className="projects-loading">Projeler yükleniyor...</div>
+                    <h2 className="section__title">{t('projects.title')}</h2>
+                    <div className="projects-loading">{t('projects.loading')}</div>
                 </div>
             </section>
         );
@@ -65,7 +67,7 @@ export const Projects: React.FC = () => {
         return (
             <section id="projects" className="section projects-section">
                 <div className="container">
-                    <h2 className="section__title">Öne Çıkan Projeler</h2>
+                    <h2 className="section__title">{t('projects.title')}</h2>
                     <div className="projects-error">{error}</div>
                 </div>
             </section>
@@ -77,11 +79,10 @@ export const Projects: React.FC = () => {
             <div className="container">
                 <div className="projects-header">
                     <div>
-                        <span className="projects-subtitle">PORTFOLIO</span>
-                        <h2 className="section__title projects-main-title">Öne Çıkan Projeler</h2>
+                        <h2 className="section__title projects-main-title">{t('projects.title')}</h2>
                     </div>
                     <a href="https://github.com/cemilenurerden" target="_blank" rel="noopener noreferrer" className="projects-view-all">
-                        Hepsini Gör <span>&rarr;</span>
+                        {t('projects.viewAll')} <span>&rarr;</span>
                     </a>
                 </div>
 
@@ -124,7 +125,7 @@ export const Projects: React.FC = () => {
                                             target="_blank"
                                             rel="noopener noreferrer"
                                             className="project-card__link"
-                                            title="Kodu Görüntüle"
+                                            title={t('projects.viewCode')}
                                             onClick={(e) => e.stopPropagation()}
                                         >
                                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" width="18" height="18">
@@ -138,7 +139,7 @@ export const Projects: React.FC = () => {
                                                 target="_blank"
                                                 rel="noopener noreferrer"
                                                 className="project-card__link"
-                                                title="Canlı Demo"
+                                                title={t('projects.liveDemo')}
                                                 onClick={(e) => e.stopPropagation()}
                                             >
                                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" width="18" height="18">
@@ -151,7 +152,7 @@ export const Projects: React.FC = () => {
                                     </div>
                                 </div>
                                 <p className="project-card__description">
-                                    {repo.description || 'Bu proje için henüz bir açıklama girilmemiş.'}
+                                    {repo.description || t('projects.noDescription')}
                                 </p>
                             </div>
                         </div>

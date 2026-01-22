@@ -1,4 +1,5 @@
 import { useState, useRef, type ChangeEvent } from 'react';
+import { useLanguage } from '../../contexts/LanguageContext';
 import './Hero.css';
 
 /* ============================================
@@ -7,9 +8,6 @@ import './Hero.css';
 
 interface HeroProps {
     name?: string;
-    title?: string;
-    highlightedText?: string;
-    description?: string;
     defaultProfileImage?: string;
     resumeUrl?: string;
 }
@@ -20,12 +18,10 @@ interface HeroProps {
 
 export function Hero({
     name = 'Cemile',
-    title = 'A Software Engineering Student building',
-    highlightedText = 'scalable solutions',
-    description = 'and pixel-perfect interfaces.',
     defaultProfileImage,
     resumeUrl = '/cv.pdf'
 }: HeroProps) {
+    const { t } = useLanguage();
 
     const [profileImage, setProfileImage] = useState<string | undefined>(() => {
         // Try to load image from localStorage on initial state
@@ -44,7 +40,7 @@ export function Hero({
         if (file) {
             // Validate file type
             if (!file.type.startsWith('image/')) {
-                alert('Lütfen bir resim dosyası seçin.');
+                alert(t('hero.imageAlert'));
                 return;
             }
 
@@ -105,16 +101,14 @@ export function Hero({
 
             {/* Description */}
             <p className="hero__description">
-                {title}{' '}
-                <span className="hero__highlight">{highlightedText}</span>{' '}
-                {description}
+                {t('hero.title')}
             </p>
 
             {/* CTA Buttons */}
             <div className="hero__buttons">
                 <a href="#links" className="hero__btn hero__btn--primary">
                     <span className="hero__btn-icon">🔗</span>
-                    <span>İletişim</span>
+                    <span>{t('hero.contact')}</span>
                 </a>
                 <a
                     href={resumeUrl}
@@ -122,7 +116,7 @@ export function Hero({
                     className="hero__btn hero__btn--secondary"
                 >
                     <span className="hero__btn-icon">↓</span>
-                    <span>CV indir</span>
+                    <span>{t('hero.downloadCV')}</span>
                 </a>
             </div>
 

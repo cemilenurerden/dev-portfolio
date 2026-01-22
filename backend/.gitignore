@@ -1,0 +1,12 @@
+# Backend Dependencies
+node_modules/
+
+# Environment variables (PASSWORDS!)
+.env
+.env.local
+.env.*.local
+
+# Logs
+logs/
+*.log
+npm-debug.log*

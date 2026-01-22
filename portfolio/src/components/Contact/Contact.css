@@ -222,3 +222,26 @@
     opacity: 0.6;
     cursor: not-allowed;
 }
+
+/* Light Mode Overrides */
+[data-theme="light"] .contact-form {
+    background: rgba(255, 255, 255, 0.9);
+    border-color: rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="light"] .form-input,
+[data-theme="light"] .form-textarea {
+    background: rgba(0, 0, 0, 0.03);
+    border-color: rgba(0, 0, 0, 0.15);
+    color: var(--color-text-primary);
+}
+
+[data-theme="light"] .form-input:focus,
+[data-theme="light"] .form-textarea:focus {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="light"] .form-icon {
+    color: var(--color-text-muted);
+}
