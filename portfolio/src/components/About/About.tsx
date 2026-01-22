@@ -1,27 +1,27 @@
 import React from 'react';
+import { useLanguage } from '../../contexts/LanguageContext';
 import './About.css';
 
 export const About: React.FC = () => {
-    const experiences = [
-        {
-            title: 'Software Engineer Intern',
-            company: 'Akgun Technology',
-            period: 'June 2025 - August 2025',
-            isCurrent: false,
-            highlights: [
-                'Developed frontend features and integrated them with backend services via APIs.',
-                'Built user interfaces using Ionic component structures and managed data received from services.',
-                'Gained experience using GitHub (branching, commits, pull requests) and participated in team collaboration workflows.'
-            ]
-        }
-    ];
+    const { t } = useLanguage();
+
+    const experience = {
+        title: t('about.expTitle'),
+        company: t('about.expCompany'),
+        period: t('about.expPeriod'),
+        isCurrent: false,
+        highlights: [
+            t('about.expHighlight1'),
+            t('about.expHighlight2'),
+            t('about.expHighlight3')
+        ]
+    };
 
     const education = {
-        degree: 'Software Engineering',
-        school: 'Kırklareli University',
-        period: '2022 - 2026',
+        degree: t('about.eduDegree'),
+        school: t('about.eduSchool'),
+        period: t('about.eduPeriod'),
         gpa: '3.24/4.00',
-
     };
 
     const skills = [
@@ -39,10 +39,10 @@ export const About: React.FC = () => {
                 {/* Header */}
                 <div className="about-header">
                     <h2 className="about-title">
-                        ABOUT <span className="about-title-highlight">ME</span>
+                        {t('about.title')}{t('about.titleHighlight') && <> <span className="about-title-highlight">{t('about.titleHighlight')}</span></>}
                     </h2>
                     <p className="about-subtitle">
-                        Software Engineer & System Architect. Building scalable systems with minimalist precision.
+                        {t('about.subtitle')}
                     </p>
                 </div>
 
@@ -53,28 +53,26 @@ export const About: React.FC = () => {
                         <div className="about-section-block">
                             <div className="section-header">
                                 <span className="section-icon">💼</span>
-                                <h3 className="section-title">EXPERIENCE</h3>
+                                <h3 className="section-title">{t('about.experience')}</h3>
                             </div>
                             <div className="timeline">
-                                {experiences.map((exp, index) => (
-                                    <div key={index} className="timeline-item">
-                                        <div className="timeline-dot"></div>
-                                        <div className="timeline-card">
-                                            <div className="timeline-card-header">
-                                                <h4 className="timeline-title">{exp.title}</h4>
-                                                <span className={`timeline-period ${exp.isCurrent ? 'current' : ''}`}>
-                                                    {exp.period}
-                                                </span>
-                                            </div>
-                                            <p className="timeline-company">{exp.company}</p>
-                                            <ul className="timeline-highlights">
-                                                {exp.highlights.map((highlight, i) => (
-                                                    <li key={i}>{highlight}</li>
-                                                ))}
-                                            </ul>
+                                <div className="timeline-item">
+                                    <div className="timeline-dot"></div>
+                                    <div className="timeline-card">
+                                        <div className="timeline-card-header">
+                                            <h4 className="timeline-title">{experience.title}</h4>
+                                            <span className={`timeline-period ${experience.isCurrent ? 'current' : ''}`}>
+                                                {experience.period}
+                                            </span>
                                         </div>
+                                        <p className="timeline-company">{experience.company}</p>
+                                        <ul className="timeline-highlights">
+                                            {experience.highlights.map((highlight: string, i: number) => (
+                                                <li key={i}>{highlight}</li>
+                                            ))}
+                                        </ul>
                                     </div>
-                                ))}
+                                </div>
                             </div>
                         </div>
 
@@ -82,7 +80,7 @@ export const About: React.FC = () => {
                         <div className="about-section-block">
                             <div className="section-header">
                                 <span className="section-icon">🎓</span>
-                                <h3 className="section-title">EDUCATION</h3>
+                                <h3 className="section-title">{t('about.education')}</h3>
                             </div>
                             <div className="education-card">
                                 <div className="education-header">
@@ -103,20 +101,17 @@ export const About: React.FC = () => {
                         <div className="bio-card">
                             <div className="bio-header">
                                 <span className="bio-dot"></span>
-                                <h3 className="bio-title">BIO</h3>
+                                <h3 className="bio-title">{t('about.bio')}</h3>
                             </div>
                             <p className="bio-text">
-                                I am a passionate software engineering student focused on building scalable systems and clean,
-                                minimalist interfaces. I enjoy working in challenging environments and turning complex problems
-                                into elegant code. When I’m not coding, I explore new technology stacks.
-                                I develop AI-integrated web and mobile systems.
+                                {t('about.bioText')}
                             </p>
 
                         </div>
 
                         {/* Technical Skills */}
                         <div className="skills-card">
-                            <h3 className="skills-title">TECHNICAL SKILLS</h3>
+                            <h3 className="skills-title">{t('about.skills')}</h3>
                             <div className="skills-list">
                                 {skills.map((skill, index) => (
                                     <div key={index} className="skill-item">
@@ -137,7 +132,7 @@ export const About: React.FC = () => {
 
                         {/* Tools & Tech */}
                         <div className="tools-card">
-                            <h3 className="tools-title">TOOLS & TECH</h3>
+                            <h3 className="tools-title">{t('about.tools')}</h3>
                             <div className="tools-list">
                                 {tools.map((tool, index) => (
                                     <span key={index} className="tool-tag">{tool}</span>

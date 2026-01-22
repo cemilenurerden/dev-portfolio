@@ -31,11 +31,14 @@
     margin: 0 auto;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
+    position: relative;
 }
 
-/* Logo */
+/* Logo - sol tarafa sabitlenmiş */
 .navbar__logo {
+    position: absolute;
+    left: 0;
     display: flex;
     align-items: center;
     gap: var(--spacing-sm);
@@ -136,6 +139,54 @@
     transform: translateX(3px);
 }
 
+/* Theme Toggle Button */
+.navbar__theme-toggle {
+    position: absolute;
+    right: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: var(--radius-full);
+    color: var(--color-text-primary);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.navbar__theme-toggle:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: var(--color-accent-primary);
+    color: var(--color-accent-primary);
+}
+
+/* Language Toggle Button */
+.navbar__lang-toggle {
+    position: absolute;
+    right: 230px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: var(--radius-full);
+    color: var(--color-text-primary);
+    cursor: pointer;
+    font-size: 0.75rem;
+    font-weight: var(--font-weight-bold);
+    transition: all var(--transition-fast);
+}
+
+.navbar__lang-toggle:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: var(--color-accent-primary);
+    color: var(--color-accent-primary);
+}
+
 /* Mobile Menu Toggle */
 .navbar__toggle {
     display: none;
@@ -223,4 +274,18 @@
         justify-content: center;
         margin-top: var(--spacing-md);
     }
+}
+
+/* Light Mode Overrides */
+[data-theme="light"] .navbar__theme-toggle {
+    background: rgba(0, 0, 0, 0.05);
+    border-color: rgba(0, 0, 0, 0.15);
+}
+
+[data-theme="light"] .navbar__theme-toggle:hover {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="light"] .navbar__toggle-line {
+    background-color: var(--color-text-primary);
 }

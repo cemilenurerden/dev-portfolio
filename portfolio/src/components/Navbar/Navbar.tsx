@@ -1,32 +1,14 @@
 import { useState, useEffect, useCallback } from 'react';
+import { useLanguage } from '../../contexts/LanguageContext';
 import './Navbar.css';
 
 /* ============================================
    Types & Interfaces
    ============================================ */
 
-interface NavLink {
-    id: string;
-    label: string;
-    href: string;
-}
-
 interface NavbarProps {
     logoText?: string;
-    ctaText?: string;
-    ctaHref?: string;
 }
-
-/* ============================================
-   Constants
-   ============================================ */
-
-const NAV_LINKS: NavLink[] = [
-    { id: 'home', label: 'Home', href: '#home' },
-    { id: 'about', label: 'About Me', href: '#about' },
-    { id: 'projects', label: 'Projects', href: '#projects' },
-    { id: 'contact', label: 'Contact', href: '#contact' },
-];
 
 const SCROLL_THRESHOLD = 50;
 
@@ -36,12 +18,19 @@ const SCROLL_THRESHOLD = 50;
 
 export function Navbar({
     logoText = 'Cemile.dev',
-    ctaText = "Let's Talk",
-    ctaHref = '#contact'
 }: NavbarProps) {
+    const { language, setLanguage, t } = useLanguage();
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [activeLink, setActiveLink] = useState('home');
+    const [isDarkMode, setIsDarkMode] = useState(true);
+
+    const navLinks = [
+        { id: 'home', label: t('nav.home'), href: '#home' },
+        { id: 'about', label: t('nav.about'), href: '#about' },
+        { id: 'projects', label: t('nav.projects'), href: '#projects' },
+        { id: 'contact', label: t('nav.contact'), href: '#contact' },
+    ];
 
     // Handle scroll effect
     const handleScroll = useCallback(() => {
@@ -58,6 +47,21 @@ export function Navbar({
     const toggleMobileMenu = useCallback(() => {
         setIsMobileMenuOpen(prev => !prev);
     }, []);
+
+    // Toggle dark mode
+    const toggleDarkMode = useCallback(() => {
+        setIsDarkMode(prev => {
+            const newMode = !prev;
+            document.documentElement.setAttribute('data-theme', newMode ? 'dark' : 'light');
+            localStorage.setItem('theme', newMode ? 'dark' : 'light');
+            return newMode;
+        });
+    }, []);
+
+    // Toggle language
+    const toggleLanguage = useCallback(() => {
+        setLanguage(language === 'en' ? 'tr' : 'en');
+    }, [language, setLanguage]);
 
     // Scroll listener setup
     useEffect(() => {
@@ -77,6 +81,16 @@ export function Navbar({
         return () => window.removeEventListener('resize', handleResize);
     }, []);
 
+    // Load theme from localStorage on mount
+    useEffect(() => {
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            const isDark = savedTheme === 'dark';
+            setIsDarkMode(isDark);
+            document.documentElement.setAttribute('data-theme', savedTheme);
+        }
+    }, []);
+
     return (
         <header className={`navbar ${isScrolled ? 'navbar--scrolled' : ''}`}>
             <div className="navbar__container">
@@ -88,7 +102,7 @@ export function Navbar({
 
                 {/* Desktop Navigation */}
                 <nav className="navbar__nav" aria-label="Main navigation">
-                    {NAV_LINKS.map(link => (
+                    {navLinks.map(link => (
                         <a
                             key={link.id}
                             href={link.href}
@@ -100,11 +114,41 @@ export function Navbar({
                     ))}
                 </nav>
 
-                {/* CTA Button */}
-                <a href={ctaHref} className="navbar__cta">
-                    <span>{ctaText}</span>
-                    <span className="navbar__cta-arrow">→</span>
-                </a>
+                {/* Language Toggle Button */}
+                <button
+                    className="navbar__lang-toggle"
+                    onClick={toggleLanguage}
+                    aria-label={language === 'en' ? 'Switch to Turkish' : 'Switch to English'}
+                >
+                    {language === 'en' ? 'TR' : 'EN'}
+                </button>
+
+                {/* Theme Toggle Button */}
+                <button
+                    className="navbar__theme-toggle"
+                    onClick={toggleDarkMode}
+                    aria-label={isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'}
+                >
+                    {isDarkMode ? (
+                        // Sun icon (for switching to light mode)
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="20" height="20">
+                            <circle cx="12" cy="12" r="5"></circle>
+                            <line x1="12" y1="1" x2="12" y2="3"></line>
+                            <line x1="12" y1="21" x2="12" y2="23"></line>
+                            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                            <line x1="1" y1="12" x2="3" y2="12"></line>
+                            <line x1="21" y1="12" x2="23" y2="12"></line>
+                            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                        </svg>
+                    ) : (
+                        // Moon icon (for switching to dark mode)
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="20" height="20">
+                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                        </svg>
+                    )}
+                </button>
 
                 {/* Mobile Menu Toggle */}
                 <button
@@ -124,7 +168,7 @@ export function Navbar({
                 className={`navbar__mobile-menu ${isMobileMenuOpen ? 'navbar__mobile-menu--open' : ''}`}
                 aria-label="Mobile navigation"
             >
-                {NAV_LINKS.map(link => (
+                {navLinks.map(link => (
                     <a
                         key={link.id}
                         href={link.href}
@@ -134,10 +178,6 @@ export function Navbar({
                         {link.label}
                     </a>
                 ))}
-                <a href={ctaHref} className="navbar__cta" onClick={() => setIsMobileMenuOpen(false)}>
-                    <span>{ctaText}</span>
-                    <span className="navbar__cta-arrow">→</span>
-                </a>
             </nav>
         </header>
     );

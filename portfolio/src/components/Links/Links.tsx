@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useLanguage } from '../../contexts/LanguageContext';
 import './Links.css';
 
 interface LinkCardProps {
@@ -12,7 +13,7 @@ interface LinkCardProps {
     accentColor: string;
 }
 
-const LinkCard: React.FC<LinkCardProps> = ({ icon, title, subtitle, actionLabel, actionHref, isCopy, accentColor }) => {
+const LinkCard: React.FC<LinkCardProps & { copiedText: string }> = ({ icon, title, subtitle, actionLabel, actionHref, isCopy, accentColor, copiedText }) => {
     const [copied, setCopied] = useState(false);
 
     const handleAction = () => {
@@ -39,7 +40,7 @@ const LinkCard: React.FC<LinkCardProps> = ({ icon, title, subtitle, actionLabel,
                 {isCopy ? (
                     <>
                         <span className="link-card__btn-icon">{copied ? '✅' : '📋'}</span>
-                        {copied ? 'Kopyalandı' : actionLabel}
+                        {copied ? copiedText : actionLabel}
                     </>
                 ) : (
                     <>
@@ -53,11 +54,13 @@ const LinkCard: React.FC<LinkCardProps> = ({ icon, title, subtitle, actionLabel,
 };
 
 export const Links: React.FC = () => {
+    const { t } = useLanguage();
+
     return (
         <section id="links" className="section links-section">
             <div className="container">
                 <div className="links-header">
-                    <h2 className="section__title links-main-title">İletişim & Sosyal Medya</h2>
+                    <h2 className="section__title links-main-title">{t('links.title')}</h2>
                 </div>
                 <div className="links-grid">
                     <LinkCard
@@ -72,6 +75,7 @@ export const Links: React.FC = () => {
                         actionLabel="Send Email"
                         actionHref="mailto:cemileerden06@gmail.com"
                         accentColor="#2dd4bf"
+                        copiedText={t('links.copied')}
                     />
                     <LinkCard
                         id="linkedin"
@@ -85,6 +89,7 @@ export const Links: React.FC = () => {
                         actionLabel="Open Profile"
                         actionHref="https://www.linkedin.com/in/cemile-nur-erden5/"
                         accentColor="#0077b5"
+                        copiedText={t('links.copied')}
                     />
                     <LinkCard
                         id="github"
@@ -98,6 +103,7 @@ export const Links: React.FC = () => {
                         actionLabel="Open Profile"
                         actionHref="https://github.com/cemilenurerden"
                         accentColor="#fafafa"
+                        copiedText={t('links.copied')}
                     />
                     <LinkCard
                         id="medium"
@@ -111,6 +117,7 @@ export const Links: React.FC = () => {
                         actionLabel="Open Profile"
                         actionHref="https://medium.com/@cemileerden06"
                         accentColor="#ffc017"
+                        copiedText={t('links.copied')}
                     />
                 </div>
             </div>

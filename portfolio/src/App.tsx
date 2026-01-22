@@ -17,17 +17,13 @@ function App() {
     <div className="app">
       <Navbar
         logoText="Cemile.dev"
-        ctaText="Let's Talk"
-        ctaHref="#contact"
+
       />
 
       <main className="main-content">
         {/* Hero Section */}
         <Hero
           name="Cemile"
-          title="A Software Engineering Student building"
-          highlightedText="scalable solutions"
-          description="and pixel-perfect interfaces."
           resumeUrl="/cv.pdf"
         />
 
