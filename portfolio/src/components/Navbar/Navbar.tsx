@@ -114,53 +114,51 @@ export function Navbar({
                     ))}
                 </nav>
 
-                {/* Language Toggle Button */}
-                <button
-                    className="navbar__lang-toggle"
-                    onClick={toggleLanguage}
-                    aria-label={language === 'en' ? 'Switch to Turkish' : 'Switch to English'}
-                >
-                    {language === 'en' ? 'TR' : 'EN'}
-                </button>
+                {/* Actions (Lang, Theme, Mobile Toggle) */}
+                <div className="navbar__actions">
+                    <button
+                        className="navbar__lang-toggle"
+                        onClick={toggleLanguage}
+                        aria-label={language === 'en' ? 'Switch to Turkish' : 'Switch to English'}
+                    >
+                        {language === 'en' ? 'TR' : 'EN'}
+                    </button>
 
-                {/* Theme Toggle Button */}
-                <button
-                    className="navbar__theme-toggle"
-                    onClick={toggleDarkMode}
-                    aria-label={isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'}
-                >
-                    {isDarkMode ? (
-                        // Sun icon (for switching to light mode)
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="20" height="20">
-                            <circle cx="12" cy="12" r="5"></circle>
-                            <line x1="12" y1="1" x2="12" y2="3"></line>
-                            <line x1="12" y1="21" x2="12" y2="23"></line>
-                            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-                            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-                            <line x1="1" y1="12" x2="3" y2="12"></line>
-                            <line x1="21" y1="12" x2="23" y2="12"></line>
-                            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-                            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-                        </svg>
-                    ) : (
-                        // Moon icon (for switching to dark mode)
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="20" height="20">
-                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-                        </svg>
-                    )}
-                </button>
+                    <button
+                        className="navbar__theme-toggle"
+                        onClick={toggleDarkMode}
+                        aria-label={isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'}
+                    >
+                        {isDarkMode ? (
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="20" height="20">
+                                <circle cx="12" cy="12" r="5"></circle>
+                                <line x1="12" y1="1" x2="12" y2="3"></line>
+                                <line x1="12" y1="21" x2="12" y2="23"></line>
+                                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                                <line x1="1" y1="12" x2="3" y2="12"></line>
+                                <line x1="21" y1="12" x2="23" y2="12"></line>
+                                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                            </svg>
+                        ) : (
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="20" height="20">
+                                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                            </svg>
+                        )}
+                    </button>
 
-                {/* Mobile Menu Toggle */}
-                <button
-                    className={`navbar__toggle ${isMobileMenuOpen ? 'navbar__toggle--open' : ''}`}
-                    onClick={toggleMobileMenu}
-                    aria-expanded={isMobileMenuOpen}
-                    aria-label="Toggle navigation menu"
-                >
-                    <span className="navbar__toggle-line" />
-                    <span className="navbar__toggle-line" />
-                    <span className="navbar__toggle-line" />
-                </button>
+                    <button
+                        className={`navbar__toggle ${isMobileMenuOpen ? 'navbar__toggle--open' : ''}`}
+                        onClick={toggleMobileMenu}
+                        aria-expanded={isMobileMenuOpen}
+                        aria-label="Toggle navigation menu"
+                    >
+                        <span className="navbar__toggle-line" />
+                        <span className="navbar__toggle-line" />
+                        <span className="navbar__toggle-line" />
+                    </button>
+                </div>
             </div>
 
             {/* Mobile Menu */}
