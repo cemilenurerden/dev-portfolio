@@ -16,9 +16,12 @@ interface Repository {
 const getProjectImage = (name: string) => {
     const images: { [key: string]: string } = {
         'dev-portfolio': '/projects/dev-portfolio.png',
-        'CityDiscovery': '/projects/city-discovery.png',
+        'cityDiscovery': '/projects/city-discovery.jpeg',
+        'NeGerekApp': '/projects/NeGerek.png',
         'MultiModel_Leaf_Disease_Classifier': '/projects/leaf-disease.png',
         'Protein-Structure-Prediction': '/projects/protein-structure.png',
+        'STAJ22001': '/projects/staj1.png',
+        'STAJ22002': '/projects/staj2.png',
     };
     return images[name] || '/projects/default.png';
 };
@@ -40,7 +43,9 @@ export const Projects: React.FC = () => {
                 const data = await response.json();
 
                 // Filter out forks and repositories without descriptions if desired
-                const filteredRepos = data.filter((repo: Repository) => !repo.fork);
+                const filteredRepos = data.filter((repo: Repository) =>
+                    !repo.fork && repo.name !== 'ButtonControlPanel'
+                );
                 setRepos(filteredRepos);
             } catch (err) {
                 setError(err instanceof Error ? err.message : 'An error occurred');

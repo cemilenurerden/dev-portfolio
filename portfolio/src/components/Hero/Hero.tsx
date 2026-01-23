@@ -1,4 +1,3 @@
-import { useState, useRef, type ChangeEvent } from 'react';
 import { useLanguage } from '../../contexts/LanguageContext';
 import './Hero.css';
 
@@ -8,7 +7,6 @@ import './Hero.css';
 
 interface HeroProps {
     name?: string;
-    defaultProfileImage?: string;
     resumeUrl?: string;
 }
 
@@ -18,80 +16,23 @@ interface HeroProps {
 
 export function Hero({
     name = 'Cemile',
-    defaultProfileImage,
     resumeUrl = '/cv.pdf'
 }: HeroProps) {
     const { t } = useLanguage();
 
-    const [profileImage, setProfileImage] = useState<string | undefined>(() => {
-        // Try to load image from localStorage on initial state
-        return localStorage.getItem('profileImage') || defaultProfileImage;
-    });
-    const fileInputRef = useRef<HTMLInputElement>(null);
-
-    // Handle profile image click - trigger file input
-    const handleProfileClick = () => {
-        fileInputRef.current?.click();
-    };
-
-    // Handle file selection
-    const handleImageChange = (event: ChangeEvent<HTMLInputElement>) => {
-        const file = event.target.files?.[0];
-        if (file) {
-            // Validate file type
-            if (!file.type.startsWith('image/')) {
-                alert(t('hero.imageAlert'));
-                return;
-            }
-
-            // Convert to Base64 to save in localStorage
-            const reader = new FileReader();
-            reader.onloadend = () => {
-                const base64String = reader.result as string;
-                setProfileImage(base64String);
-                localStorage.setItem('profileImage', base64String);
-            };
-            reader.readAsDataURL(file);
-        }
-    };
-
-    // Fonksiyonu siliyoruz çünkü artık direkt link kullanacağız.
+    const profileImage = '/projects/pp.jpeg';
 
     return (
         <section id="home" className="hero">
-            {/* Profile Image - Clickable */}
+            {/* Profile Image - Static */}
             <div className="hero__profile">
-                <button
-                    type="button"
-                    className="hero__profile-button"
-                    onClick={handleProfileClick}
-                    aria-label="Profil fotoğrafı seç"
-                >
-                    <div className="hero__profile-ring">
-                        {profileImage ? (
-                            <img
-                                src={profileImage}
-                                alt={`${name}'s profile`}
-                                className="hero__profile-image"
-                            />
-                        ) : (
-                            <div className="hero__profile-image hero__profile-placeholder">
-                                <span className="hero__profile-initial">{name.charAt(0)}</span>
-                            </div>
-                        )}
-                    </div>
-                </button>
-
-                {/* Hidden file input */}
-                <input
-                    ref={fileInputRef}
-                    type="file"
-                    accept="image/*"
-                    onChange={handleImageChange}
-                    className="hero__profile-input"
-                    aria-hidden="true"
-                />
-
+                <div className="hero__profile-ring">
+                    <img
+                        src={profileImage}
+                        alt={`${name}'s profile`}
+                        className="hero__profile-image"
+                    />
+                </div>
             </div>
 
             {/* Greeting */}

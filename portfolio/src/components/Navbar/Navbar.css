@@ -31,14 +31,12 @@
     margin: 0 auto;
     display: flex;
     align-items: center;
-    justify-content: center;
-    position: relative;
+    justify-content: space-between;
+    gap: var(--spacing-md);
 }
 
 /* Logo - sol tarafa sabitlenmiş */
 .navbar__logo {
-    position: absolute;
-    left: 0;
     display: flex;
     align-items: center;
     gap: var(--spacing-sm);
@@ -139,15 +137,20 @@
     transform: translateX(3px);
 }
 
+/* Actions Group */
+.navbar__actions {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
 /* Theme Toggle Button */
 .navbar__theme-toggle {
-    position: absolute;
-    right: 180px;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 40px;
-    height: 40px;
+    width: 36px;
+    height: 36px;
     background: rgba(255, 255, 255, 0.1);
     border: 1px solid rgba(255, 255, 255, 0.15);
     border-radius: var(--radius-full);
@@ -164,19 +167,17 @@
 
 /* Language Toggle Button */
 .navbar__lang-toggle {
-    position: absolute;
-    right: 230px;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 40px;
-    height: 40px;
+    width: 36px;
+    height: 36px;
     background: rgba(255, 255, 255, 0.1);
     border: 1px solid rgba(255, 255, 255, 0.15);
     border-radius: var(--radius-full);
     color: var(--color-text-primary);
     cursor: pointer;
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     font-weight: var(--font-weight-bold);
     transition: all var(--transition-fast);
 }
@@ -242,37 +243,34 @@
 }
 
 /* Responsive Styles */
-@media (max-width: 768px) {
-    .navbar {
-        padding: var(--spacing-md);
-    }
-
+@media (max-width: 992px) {
     .navbar__nav {
-        display: none;
-    }
-
-    .navbar__cta {
         display: none;
     }
 
     .navbar__toggle {
         display: flex;
     }
+}
+
+@media (max-width: 768px) {
+    .navbar {
+        padding: var(--spacing-sm) var(--spacing-md);
+    }
+
+    .navbar__logo span:last-child {
+        display: none;
+    }
 
     .navbar__mobile-menu .navbar__link {
         display: block;
         padding: var(--spacing-md);
         border-radius: var(--radius-md);
+        text-align: center;
     }
 
     .navbar__mobile-menu .navbar__link:hover {
         background-color: var(--color-border);
-    }
-
-    .navbar__mobile-menu .navbar__cta {
-        display: inline-flex;
-        justify-content: center;
-        margin-top: var(--spacing-md);
     }
 }
 
