@@ -29,6 +29,7 @@ export function Navbar({
         { id: 'home', label: t('nav.home'), href: '#home' },
         { id: 'about', label: t('nav.about'), href: '#about' },
         { id: 'projects', label: t('nav.projects'), href: '#projects' },
+        { id: 'blog', label: t('nav.blog'), href: '#blog' },
         { id: 'contact', label: t('nav.contact'), href: '#contact' },
     ];
 
