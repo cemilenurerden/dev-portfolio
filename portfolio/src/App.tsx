@@ -3,6 +3,7 @@ import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { Links } from './components/Links';
 import { Projects } from './components/Projects';
+import { Blog } from './components/Blog';
 import { About } from './components/About';
 import { Contact } from './components/Contact';
 
@@ -35,6 +36,9 @@ function App() {
 
         {/* Projects Section */}
         <Projects />
+
+        {/* Blog Section */}
+        <Blog />
 
         {/* Contact Section */}
         <Contact />

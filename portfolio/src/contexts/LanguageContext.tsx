@@ -14,6 +14,7 @@ const translations = {
         'nav.home': 'Home',
         'nav.about': 'About Me',
         'nav.projects': 'Projects',
+        'nav.blog': 'Blog',
         'nav.contact': 'Contact',
 
         // Hero
@@ -34,6 +35,13 @@ const translations = {
         'projects.noDescription': 'No description available for this project.',
         'projects.viewCode': 'View Code',
         'projects.liveDemo': 'Live Demo',
+
+        // Blog
+        'blog.title': 'Blog Posts',
+        'blog.viewAll': 'View All on Medium',
+        'blog.readMore': 'Read More',
+        'blog.empty': 'No blog posts yet. Check back soon!',
+
 
         // About
         'about.title': 'ABOUT',
@@ -75,6 +83,7 @@ const translations = {
         'nav.home': 'Ana Sayfa',
         'nav.about': 'Hakkımda',
         'nav.projects': 'Projeler',
+        'nav.blog': 'Blog',
         'nav.contact': 'İletişim',
 
         // Hero
@@ -95,6 +104,13 @@ const translations = {
         'projects.noDescription': 'Bu proje için henüz bir açıklama girilmemiş.',
         'projects.viewCode': 'Kodu Görüntüle',
         'projects.liveDemo': 'Canlı Demo',
+
+        // Blog
+        'blog.title': 'Blog Yazıları',
+        'blog.viewAll': "Medium'da Hepsini Gör",
+        'blog.readMore': 'Devamını Oku',
+        'blog.empty': 'Henüz blog yazısı yok. Yakında tekrar kontrol edin!',
+
 
         // About
         'about.title': 'HAKKIMDA',
